@@ -1,68 +1,77 @@
 ---
-title: Electron to Web Migration
-description: Documenting migration from Electron to Web
+title: Electron 迁移至 Web 平台
+description: 记录从 Electron 迁移到 Web 的文档
 ---
 
-# Electron to Web Migration
+# Electron 迁移至 Web 平台
 
-## Reasoning for shifting to web
+## 转向 Web 的原因
 
-With Electron, there was a lot of friction to getting started
-- Downloading hundreds of MB of app (though it could be smaller)
-- Setting up / managing local dev environment. Our users lean less technical so this is unneeded friction.
-- We spent a lot of support time helping users debug their local machine
+使用 Electron 时，入门存在很多障碍
 
-With web, we get the benefit of
-- Start editing anywhere on any machine
-- Resume editing across desktop and sharing across teams
-- Real-time collaboration
-- No more local machine setup/maintenance
+- 需要下载数百 MB 的应用程序（尽管可以更小）
+- 设置/管理本地开发环境。我们的用户技术背景较弱，这是不必要的障碍。
+- 我们花费了大量支持时间帮助用户调试本地机器
 
-## Mapping to web equivalent
+而使用 Web，我们可以获得以下好处
 
-### The “front-end”
+- 在任何机器的任何地方开始编辑
+- 跨桌面恢复编辑并在团队间共享
+- 实时协作
+- 无需本地机器设置/维护
+
+## 映射到 Web 等效方案
+
+### “前端”部分
+
 ```
 BrowserView 		-> 	Next.js app
 ```
 
-Thankfully, Electron ships web UI so most of our React/TailwindCSS styling was intact. Though many of the server communication had to be mapped from Electron IPC to Client-Server. We replaced those with tRPC to preserve type safety.
+幸运的是，Electron 提供了 Web UI，因此我们的大部分 React/TailwindCSS 样式得以保留。不过许多服务器通信需要从 Electron IPC 映射到客户端-服务器模式。我们使用 tRPC 替换了这些通信以保持类型安全。
 
-### The canvas/frame:
+### 画布/框架部分：
+
 ```
 WebView 		-> 	iFrame
 ```
 
-We previously used Electron webview which acted similar to an iFrame with better cross-origin support. The webview allowed us to communicate between the BrowserView and Webview to modify the DOM tree of the app directly. We replace that with iframe which is much more limited in terms of inter-process communication. For example, it is forbidden by the browser for websites to interact directly with iFrame elements if they’re not from the same origin. Our web app is not on the same origin as the served app so we had to work around this. 
+我们之前使用的是 Electron webview，它的行为类似于 iframe，但具有更好的跨域支持。webview 允许我们在 BrowserView 和 Webview 之间进行通信，直接修改应用的 DOM 树。现在我们将其替换为 iframe，但 iframe 在进程间通信方面限制更多。例如，浏览器禁止网站直接与不同源的 iframe 元素交互。我们的 Web 应用与所服务的应用不在同一源，因此必须设法绕过这一限制。
 
-What we decided to do was inject a script on the user app side which enables interprocess communication with postMessage. 
+我们决定在用户应用端注入一个脚本，通过 postMessage 实现进程间通信。
 https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage
 
-The script is internally called a preload script and is injected into the app’s layout through a CDN.
+该脚本内部称为预加载脚本，通过 CDN 注入到应用的布局中。
 
-### The “backend”
+### “后端”
+
 ```
 Node Server		-> 	Remote container
 ```
-Because Electron is a served Node server with filesystem access, we previously used the node server to edit the code of the users app directly. Since we no longer have a “user machine”, we replace that with an abstracted cloud container. This can be any system with a filesystem API that we can read/write/listen to. Currently using CodeSandbox but could be any provider or even a local running container. 
 
-### Extra stuff
+由于 Electron 是一个具有文件系统访问权限的 Node 服务器，我们之前使用该 Node 服务器直接编辑用户应用的代码。由于现在我们不再拥有“用户机器”，我们将其替换为一个抽象的云容器。这可以是任何具有文件系统 API 的系统，我们可以对其进行读/写/监听。目前使用的是 CodeSandbox，但也可以是任何提供商，甚至是本地运行的容器。
+
+### 额外内容
+
 ```
 Local memory 	->	Supabase + Caching
 ```
-Previously, we were storing most user/project information on the users machine as serialized JSON. Now, we store them in Postgres tables in Supabase. We maintain a caching layer on top of Postgres on the browser for ease of access and better loading. 
 
-## Before Architecture
+此前，我们将大部分用户/项目信息以序列化 JSON 格式存储在用户机器上。现在，我们将它们存储在 Supabase 的 Postgres 表中。我们在浏览器中的 Postgres 之上维护了一个缓存层，以便于访问和改善加载性能。
 
-![Before Architecture](/images/electron-to-web-before.png)
+## 先前架构
 
-## After Architecture
-![After Architecture](/images/electron-to-web-after.png)
+![先前架构](/images/electron-to-web-before.png)
 
-## Full After Architecture with Everything
+## 更新后架构
 
-![Full After Architecture](/images/full-architecture.png)
+![更新后架构](/images/electron-to-web-after.png)
 
-## References
+## 完整更新后架构（包含所有组件）
 
-- [Electron Repository](https://github.com/onlook-dev/desktop)
-- [Web Repository](https://github.com/onlook-dev/onlook)
+![完整更新后架构](/images/full-architecture.png)
+
+## 参考文献
+
+- [Electron 代码库](https://github.com/onlook-dev/desktop)
+- [Web 代码库](https://github.com/onlook-dev/onlook)

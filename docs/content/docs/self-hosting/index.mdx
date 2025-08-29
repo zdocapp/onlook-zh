@@ -1,56 +1,62 @@
 ---
-title: Self-Hosting Onlook
-description: Enterprise deployment options for self-hosting Onlook
+title: 自托管 Onlook
+description: 企业级自托管 Onlook 的部署选项
 ---
 
-# Self-Hosting Onlook
+# 自托管 Onlook
 
-Onlook provides flexible self-hosting options for organizations that need complete control over their visual development environment. Choose the deployment method that best fits your infrastructure and requirements.
+Onlook 为需要完全控制其可视化开发环境的组织提供了灵活的自托管选项。选择最适合您基础设施和需求的部署方法。
 
-## Deployment Options
+## 部署选项
 
-### Single Machine (Recommended)
-Deploy Onlook directly on a single server or VM using the standalone build. The simplest and most efficient way to self-host Onlook.
+### 单机部署（推荐）
 
-**Best for:**
-- Small to medium teams (5-50 users)
-- Simple production deployments
-- Cost-conscious organizations
-- Teams wanting direct control without containers
+使用独立构建直接在单台服务器或虚拟机上部署 Onlook。这是自托管 Onlook 最简单且最高效的方式。
 
-[View Single Machine Guide →](/self-hosting/single-machine)
+**最佳适用场景：**
 
-### Docker Compose
-Run Onlook using Docker containers for isolated deployment. Good for containerized environments.
+- 中小型团队（5-50 名用户）
+- 简单的生产部署
+- 注重成本效益的组织
+- 希望无需容器直接控制的团队
 
-**Best for:**
-- Organizations already using Docker
-- Development and staging environments
-- Teams requiring container isolation
-- Complex multi-service deployments
+[查看单机部署指南 →](/self-hosting/single-machine)
 
-[View Docker Compose Guide →](/self-hosting/docker-compose)
+### Docker Compose 方式
 
-### Cloud Deployment (Enterprise)
-Deploy Onlook to cloud infrastructure with proper scaling, monitoring, and enterprise features.
+使用 Docker 容器运行 Onlook 以实现隔离部署。适用于容器化环境。
 
-**Best for:**
-- Large teams and enterprise deployments
-- Organizations requiring high availability
-- Teams needing advanced monitoring and compliance
-- Multi-region deployments
+**最佳适用场景：**
 
-[View Cloud Deployment Guide →](/self-hosting/cloud-deployment)
+- 已在使用 Docker 的组织
+- 开发和预发布环境
+- 需要容器隔离的团队
+- 复杂的多服务部署
 
-## Architecture Overview
+[查看 Docker Compose 指南 →](/self-hosting/docker-compose)
 
-Onlook consists of several components:
+### 云部署（企业版）
 
-- **Web Client**: Next.js application 
-- **Backend**: Supabase for database, auth, and storage
+将 Onlook 部署到云基础设施，具备适当的扩展性、监控和企业级功能。
 
-## Support
+**最佳适用场景：**
 
-- Check the [GitHub Repository](https://github.com/onlook-dev/onlook)
-- Review [Running Locally](/developers/running-locally) for development setup
-- Join the [Discord Community](https://discord.gg/onlook)
+- 大型团队和企业部署
+- 需要高可用性的组织
+- 需要高级监控和合规性的团队
+- 多区域部署
+
+[查看云部署指南 →](/self-hosting/cloud-deployment)
+
+## 架构概览
+
+Onlook 由以下几个组件组成：
+
+- **Web 客户端**：Next.js 应用程序
+- **后端**：Supabase 用于数据库、认证和存储
+
+## 支持
+
+- 查看 [GitHub 仓库](https://github.com/onlook-dev/onlook)
+- 查阅 [本地运行](/developers/running-locally) 了解开发环境设置
+- 加入 [Discord 社区](https://discord.gg/onlook)

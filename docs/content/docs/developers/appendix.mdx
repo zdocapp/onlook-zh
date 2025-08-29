@@ -1,14 +1,15 @@
 ---
-title: Appendix
-description: Appendix for developer setup
+title: 附录
+description: 开发者设置附录
 ---
 
-## Set up environment variables manually (optional)
+## 手动设置环境变量（可选）
 
-##### 1. In `apps/web/client`
-Create a copy of the `.env.example` file under the `apps/web/client` directory and name it `.env`. Fill in the values with your own API keys.
+##### 1. 在 `apps/web/client` 目录下
 
-It should look like this:
+在 `apps/web/client` 目录下创建 `.env.example` 文件的副本，并将其命名为 `.env`。使用您自己的 API 密钥填写相应值。
+
+文件内容应如下所示：
 
 ```properties
 # ------------- Required Keys -------------
@@ -27,9 +28,9 @@ OPENROUTER_API_KEY="<Your api key from https://openrouter.ai/settings/keys>"
 CSB_API_KEY="<Your api key from https://codesandbox.io/t/api>"
 ```
 
-##### 2. In `packages/db`
+##### 2. 在 `packages/db` 目录下
 
-Create a copy of the `.env.example` file under the `packages/db` directory and name it `.env`. Fill in the values with the values from the output of the `bun backend:start` command.
+在 `packages/db` 目录下创建 `.env.example` 文件的副本，并将其命名为 `.env`。使用 `bun backend:start` 命令输出中的值填写相应值。
 
 ```properties
 SUPABASE_DATABASE_URL=postgresql://postgres:postgres@127.0.0.1:54322/postgres

@@ -15,15 +15,15 @@ const geist = Geist({
 });
 
 export const metadata = {
-    metadataBase: new URL('https://docs.onlook.dev'),
+    metadataBase: new URL('https://onlook-zh.zdoc.app'),
     title: {
-        default: 'Onlook Docs',
-        template: '%s – Onlook Docs',
+        default: 'Onlook 中文文档',
+        template: '%s – Onlook 中文文档',
     },
     description:
-        'Official documentation for Onlook – an open-source "Cursor for Designers" that lets you visually edit React & Tailwind projects.',
+        'Onlook 中文文档 —— 一个开源的 “设计师版 Cursor”，让你可以以可视化方式编辑 React 与 Tailwind 项目。',
     openGraph: {
-        siteName: 'Onlook Docs',
+        siteName: 'Onlook 中文文档',
         type: 'website',
     },
     twitter: {
@@ -51,7 +51,10 @@ export default function Layout({ children }: { children: ReactNode }) {
             <body className="flex flex-col min-h-screen">
                 {isProduction && (
                     <>
-                        <Script src="https://z.onlook.com/cdn-cgi/zaraz/i.js" strategy="lazyOnload" />
+                        <Script
+                            src="https://z.onlook.com/cdn-cgi/zaraz/i.js"
+                            strategy="lazyOnload"
+                        />
                         <RB2BLoader />
                     </>
                 )}
@@ -64,4 +67,3 @@ export default function Layout({ children }: { children: ReactNode }) {
         </html>
     );
 }
-

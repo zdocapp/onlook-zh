@@ -13,7 +13,7 @@ export const baseOptions: BaseLayoutProps = {
         title: (
             <div className="flex items-center gap-2">
                 <Icons.OnlookLogo className="w-4 h-4" />
-                <span >Onlook Docs</span>
+                <span>Onlook 中文文档</span>
             </div>
         ),
     },
@@ -21,16 +21,16 @@ export const baseOptions: BaseLayoutProps = {
         {
             type: 'main',
             text: 'GitHub',
-            url: 'https://github.com/onlook-dev/onlook',
+            url: 'https://github.com/zdocapp/onlook-zh',
             external: true,
-            icon: <Icons.GitHubLogo className="w-4 h-4" />
+            icon: <Icons.GitHubLogo className="w-4 h-4" />,
         },
         {
             type: 'main',
             text: 'Discord',
             url: 'https://discord.gg/hERDfFZCsH',
             external: true,
-            icon: <Icons.DiscordLogo className="w-4 h-4" />
-        }
-    ]
+            icon: <Icons.DiscordLogo className="w-4 h-4" />,
+        },
+    ],
 };
